@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sz</title>
+    <link rel='stylesheet' href='../css/style.css' />
+</head>
+<body>
+<% if(user) {%>
+<h2>Hi, <%= user.login %>!</h2>
+<% } %>
+<a href="/">Main page</a>
+<form action='/register' method='POST'>
+    <label>Login:</label>
+    <input type='text' id='login' name='login' class='form-control' required/>
+    <label>Password:</label>
+    <input type='password' id='pass' name="pass" class='form-control' required/>
+    <label>Repeat password:</label>
+    <input type='password' name='pass2' id="pass2" class='form-control' required/>
+    <button type='submit' class='btn btn-primary'>Register</button>
+</form>
+</body>
+</html>

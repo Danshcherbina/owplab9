@@ -1,0 +1,106 @@
+body {
+    font-family: arial;
+    text-align: center;
+}
+.page-link {
+    font-size: 300%;
+}
+#logo {
+    width: 100px;
+    padding:6px;
+}
+h1 {
+    color: grey;
+}
+.right {
+    float: right;
+}
+li {
+    font-size: 250%;
+}
+.header {
+    text-align: left;
+}
+.main {
+    text-align: center;
+}
+.other {
+    float: left;
+    position: absolute;
+}
+#sections {
+    padding: 0px;
+    margin-bottom: 40px;
+}
+li {
+    list-style: none;  
+}
+ul {
+    list-style: none;
+}
+#sections > li {
+    list-style: none;
+    padding: 0px;
+    color: darkblue;
+}
+a {   
+    text-decoration: none;
+    color: black;
+}
+img {
+    max-width:500px;
+    max-height:400px
+}
+.bordered {
+    border: 3px solid lightsteelblue;
+}
+#animated {
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+
+
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+
+    -moz-animation-name: spin;
+    -moz-animation-duration: 4000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+
+
+    -ms-animation-name: spin;
+    -ms-animation-duration: 4000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+.grow { transition: all .2s ease-in-out; }
+.grow:hover { transform: scale(1.1); }

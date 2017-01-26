@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>bb!</title>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form class="form-horizontal" method="post" action="/products" enctype="multipart/form-data">
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="name">Name:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="name" name="name" placeholder="Enter name of product">
+      <div id="1" class="blockerr"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="type">type:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="type" name="type" placeholder="Enter type of product">
+      <div id="2" class="blockerr"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="shelflife">Shelflife:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="shelflife" name="shelflife" placeholder="Enter shelflife of product">
+      <div id="3" class="blockerr"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="weight">Weight:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="weight" name="weight" placeholder="Enter weight of product">
+      <div id="4" class="blockerr"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="pic">PhotoURL:</label>
+    <div class="col-sm-6">
+      <input type="file" class="form-control" id="pic" name="pic"/>
+      <div id="5" class="blockerr"></div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button id="sbmbtn" type="submit" class="btn btn-default"  disabled>Leave it</button>
+    </div>
+  </div>
+</form>
+<ul style="">
+  <li>
+    <a href="/">Home</a>
+  </li>
+</ul>
+<script>
+    window.addEventListener("load", function(evdata) {
+        const submitbtn = document.getElementById("sbmbtn");
+        const blocks = document.getElementsByClassName("form-group");
+        const name = document.getElementById("name");
+        const type = document.getElementById("type");
+        const shelflife = document.getElementById("shelflife");
+        const weight = document.getElementById("weight");
+        const pic = document.getElementById("pic");
+
+        name.addEventListener("change", () => {
+            if (name.value === "") {
+            blocks[0].setAttribute("class", "form-group has-error");
+            document.getElementById("1").innerText = "Please fill this field";
+        } else {
+            blocks[0].setAttribute("class", "form-group has-success");
+            document.getElementById("1").innerText = "";
+        }
+        checkvalid();
+    });
+
+        type.addEventListener("change", () => {
+            if (type.value === "") {
+            blocks[1].setAttribute("class", "form-group has-error");
+            document.getElementById("2").innerText = "Please fill this field";
+        } else {
+            blocks[1].setAttribute("class", "form-group has-success");
+            document.getElementById("2").innerText = "";
+        }
+        checkvalid();
+    });
+
+        shelflife.addEventListener("change", () => {
+            if (!isNumeric(shelflife.value) || shelflife.value <= 0) {
+            blocks[2].setAttribute("class", "form-group has-error");
+            document.getElementById("3").innerText = "Please enter number more than 0";
+        } else {
+            blocks[2].setAttribute("class", "form-group has-success");
+            document.getElementById("3").innerText = "";
+        }
+        checkvalid();
+    });
+
+        weight.addEventListener("change", () => {
+            if (!isNumeric(weight.value) || weight.value <= 0) {
+            blocks[3].setAttribute("class", "form-group has-error");
+            document.getElementById("4").innerText = "Please enter number more than 0";
+        } else {
+            blocks[3].setAttribute("class", "form-group has-success");
+            document.getElementById("4").innerText = "";
+        }
+        checkvalid();
+    });
+
+        pic.addEventListener("change", () => {
+            if (pic.value === "") {
+            blocks[4].setAttribute("class", "form-group has-error");
+            document.getElementById("5").innerText = "Please fill this field";
+        } else {
+            blocks[4].setAttribute("class", "form-group has-success");
+            document.getElementById("5").innerText = "";
+        }
+        checkvalid();
+    });
+
+        function isNumeric(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        function checkvalid() {
+            if (name.value === "" || type.value === "" ||
+                shelflife.value === "" || weight.value === "" || pic.value === "") {
+                submitbtn.setAttribute("disabled", "true");
+            } else {
+                submitbtn.removeAttribute("disabled");
+            }
+        }
+    });
+</script>
+</body>
+</html>

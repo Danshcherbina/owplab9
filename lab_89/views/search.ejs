@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js'></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="http://listjs.com/assets/javascripts/list.min.js"></script>
+</head>
+<body>
+<div class="right">
+    <% if (user) { %>
+    <h2>Hi, <%= user.login %>!</h2>
+    <li><a href="/logout">LOG OUT</a></li>
+    <% } else { %>
+    <ol>
+        <li>
+            <a href="/register">REGISTER</a>
+        </li>
+        <li>
+            <a href="/login">LOG IN</a>
+        </li>
+    </ol>
+    <% } %>
+</div>
+<div class="container" id="main-content">
+    <div id="header-text-main">
+        <a class="page-link" href="/">
+            <p>Home</p>
+        </a>
+    </div>
+    <form id="searchform" class="navbar-form" role="search">
+        <div class="input-group">
+            <input type="text" id="searchtext" class="form-control" placeholder="Поиск" name="search">
+            <div class="input-group-btn">
+                <button id="search" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+    <% if (lol == "noposts") { %>
+    <h1>No posts found</h1>
+    <% } %>
+</div>
+
+<script type="text/javascript" src="/js/pager.js"></script>
+
+<script id="searchtemplate" type="x-tml-mustache">
+  <div>
+    <ul class="list">
+      <#products>
+      <li>
+            <div class="row">
+              <div class="col-md-5">
+                <a href="/product/{{id}}">
+                  <img src={{img}} />
+                </a>
+              </div>
+              <div>
+                <a class="page-link" href="/product/{{id}}">
+                  <h1>{{name}}</h1>
+                </a>
+                <h3><b>type</b>:{{type}}</h3>
+              </div>
+            </div>
+      </li>
+      </products>
+    </ul>
+    <ul class="pagination"></ul>
+    <#empty>
+      <div class="col-md-12">
+        <h4>Не знайдено!<h4>
+      </div>
+    </empty>
+  </div>
+</script>
+
+<script>
+    $("#search").click(function (event) {
+        event.preventDefault();
+        var parameters = { search: $("#searchtext").val() };
+        $.get( '/searching', parameters, function(data) {
+            let template = document.getElementById("searchtemplate").innerHTML;
+            let products = JSON.parse(data);
+            if(data.length > 2) {
+                var renderHTML = Mustache.render(template, {
+                    products: products,
+                    empty: false
+                });
+            }
+            else{
+                var renderHTML = Mustache.render(template, {
+                    empty: true
+                });
+            }
+            $("#test-list").html(renderHTML);
+            $("srchfor").html("Search for" + $("#searchtext").val());
+        });
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>sz</title>
+    <link rel='stylesheet' href='../css/style.css' />
+</head>
+<body>
+<% if(user) {%>
+<h2>Hi, <%= user.login %>!</h2>
+<% } %>
+<a href="/">Main page</a>
+<form action='/login' method='POST'>
+    <label>Login:</label>
+    <input type='text' name='username' class='form-control' required/>
+    <label>Password:</label>
+    <input type='password' name="password" class='form-control' required/>
+    <button type='submit' class='btn btn-primary'>Login</button>
+</form>
+</body>
+</html>
