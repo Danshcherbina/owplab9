@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongodb = require('promised-mongo');
 
-const url = 'mongodb://garmrr:kazzak80@ds129179.mlab.com:29179/heroku_xvs5zgf6/webprogbase';
+const url = 'mongodb://garmrr:kazzak80@ds129179.mlab.com:29179/heroku_xvs5zgf6';
 const db = mongodb(url);
 
 /* GET home page. */
